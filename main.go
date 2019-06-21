@@ -6,15 +6,21 @@ import (
 	"github.com/mattermost/mattermost-server/model"
 )
 
+const (
+	MATTERMOST_API_REST  = "http://localhost:8085"
+	MATTERMOST_API_WS    = "ws://localhost:8085"
+	MATTERMOST_BOT_TOKEN = "<bot token>"
+)
+
 var client *model.Client4
 var webSocketClient *model.WebSocketClient
 
 func main() {
-	client = model.NewAPIv4Client("http://localhost:8085")
-	client.MockSession("<bot token>")
+	client = model.NewAPIv4Client(MATTERMOST_API_REST)
+	client.MockSession(MATTERMOST_BOT_TOKEN)
 
 	// Lets start listening to some channels via the websocket!
-	webSocketClient, err := model.NewWebSocketClient4("ws://localhost:8085", client.AuthToken)
+	webSocketClient, err := model.NewWebSocketClient4(MATTERMOST_API_WS, client.AuthToken)
 	if err != nil {
 		println("We failed to connect to the web socket")
 		PrintError(err)
