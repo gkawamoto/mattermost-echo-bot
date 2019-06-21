@@ -1,4 +1,4 @@
-module github.com/mattermost/mattermost-bot-sample-golang
+module github.com/gkawamoto/mattermost-echo-bot
 
 go 1.12
 
